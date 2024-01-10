@@ -38,8 +38,8 @@ body {
 
 .select-symptoms {
     height: 4rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    /* margin-bottom: 1rem; */
+    /* margin-top: 1rem; */
     padding: 0.5rem;
     font-size: 20px;
     background-color: var(--primary-light);
@@ -62,6 +62,10 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
+}
+
+.del-symptom-btn{
+    margin-bottom: 2rem;
 }
 
 #addNewSymptomBtn {

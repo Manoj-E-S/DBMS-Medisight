@@ -64,7 +64,7 @@
                     <option class="select-option" value="33">Difficulty swallowing</option>
                     <option class="select-option" value="34">Pain in the neck or throat</option>
                 </select>
-                <button class="btn-primary" type="button" id="delSymptomBtn">-</button>
+                <button class="btn-danger del-symptom-btn" type="button" id="{{'delSymptomBtn' ~ i}}">DELETE</button>
             {% endfor %}
             <button class="btn-primary" type="button" id="addNewSymptomBtn">+</button>
             <input class="btn btn-success" type="submit" value="Search Possible Cancers" id="searchCancers">
