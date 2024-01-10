@@ -6,7 +6,7 @@ import os
 from functools import partial
 
 # Third-party Imports:
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, Response
 from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 import requests
@@ -42,6 +42,17 @@ START App Routes ###############################################################
 def entry():
     return render_template("enterSymptoms.html", select_elements=num_symptom_select_html_elements)
 
+@app.route("/showCancers", methods=['POST'])
+def showCancers():
+    if request.method == 'POST':
+        print(request.args)
+        return Response(headers={'Content-Type': 'json'})
+    else:
+        print("Apple")
+        return Response({"success": "Apple"}) 
+
+        # return render_template("")
+
 '''
 END App Routes ################################################################################
 '''
@@ -54,6 +65,12 @@ START Socket Ons ###############################################################
 def incrementSelectElementCount():
     global num_symptom_select_html_elements
     num_symptom_select_html_elements += 1
+
+
+@socketio.on("decrementSelectElementCount")
+def decrementSelectElementCount():
+    global num_symptom_select_html_elements
+    num_symptom_select_html_elements -= 1
 
 '''
 END Socket Ons ################################################################################
