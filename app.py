@@ -48,7 +48,7 @@ def showCancers():
         print(request.args)
         return Response(headers={'Content-Type': 'json'})
     else:
-        return render_template("showCancers.html", ) 
+        return render_template("showCancers.html")
 
         # return render_template("")
 
