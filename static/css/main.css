@@ -1,0 +1,81 @@
+:root {
+    --primary: #103359;
+    --primary-light: #1F3C5D;
+    --contrast: #F1F1F1;
+    --text-light: #DBDBDB;
+    --select-option: #AAAAAA;
+    --text-dark: #353535;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary);
+}
+
+.header,
+.footer {
+    padding: 5px;
+    text-align: center;
+    color: var(--text-light);
+    background-color: var(--primary-light);
+}
+
+.footer {
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+    width: 100%;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 87vh;
+}
+
+.select-symptoms {
+    height: 4rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    font-size: 20px;
+    background-color: var(--primary-light);
+    color: var(--text-light);
+    border: none;
+}
+
+.select-symptoms:focus {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+}
+
+.select-option {
+    background-color: var(--select-option);
+    color: var(--text-dark);
+}
+
+.forms {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#addNewSymptomBtn {
+    position: absolute;
+    right: -2.5%;
+    bottom: 91px;
+    border-radius: 100%;
+    font-size: 27px;
+    padding: 0.4rem 1rem;
+    border-style: none;
+}
+
+#searchCancers {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    color: var(--text-dark);
+}
