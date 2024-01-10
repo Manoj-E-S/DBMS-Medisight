@@ -42,14 +42,13 @@ START App Routes ###############################################################
 def entry():
     return render_template("enterSymptoms.html", select_elements=num_symptom_select_html_elements)
 
-@app.route("/showCancers", methods=['POST'])
+@app.route("/showCancers", methods=['POST', 'GET'])
 def showCancers():
     if request.method == 'POST':
         print(request.args)
         return Response(headers={'Content-Type': 'json'})
     else:
-        print("Apple")
-        return Response({"success": "Apple"}) 
+        return render_template("showCancers.html", ) 
 
         # return render_template("")
 
@@ -75,7 +74,7 @@ def decrementSelectElementCount():
 '''
 END Socket Ons ################################################################################
 '''
-
+# GET from https://randomuser.me/api - random doctor data
 
 # Run the app with SocketIO
 if __name__ == "__main__":
