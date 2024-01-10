@@ -10,4 +10,6 @@ $(".del-symptom-btn").click((event) => {
     var symptomDivId = $(`#${buttonId}`).prev().attr("id");
     $(`#${buttonId}`).remove();
     $(`#${symptomDivId}`).remove(); 
+    socket.emit('decrementSelectElementCount');
+    window.location.reload();
 });

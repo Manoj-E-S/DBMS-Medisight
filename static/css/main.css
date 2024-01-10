@@ -70,16 +70,28 @@ body {
 
 #addNewSymptomBtn {
     position: absolute;
+    width: 40px;
+    height: 40px;
     right: -10%;
-    bottom: 91px;
+    bottom: 130px;
     border-radius: 100%;
-    font-size: 27px;
     display: flex;
     align-self: center;
     justify-self: center;
     padding: 0.4rem 1rem;
     border-style: none;
 }
+
+.addNewSymptomBtnContent{
+    padding: 0;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: -3px;
+    top: -4px;
+}
+
 
 #searchCancers {
     margin-bottom: 1rem;
