@@ -66,10 +66,13 @@ body {
 
 #addNewSymptomBtn {
     position: absolute;
-    right: -2.5%;
+    right: -10%;
     bottom: 91px;
     border-radius: 100%;
     font-size: 27px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
     padding: 0.4rem 1rem;
     border-style: none;
 }
