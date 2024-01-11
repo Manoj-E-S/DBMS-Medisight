@@ -4,10 +4,9 @@ START Imports ##################################################################
 # Built-in Imports:
 import os 
 from functools import partial
-import json
 
 # Third-party Imports:
-from flask import Flask, render_template, request, url_for, redirect, Response, jsonify
+from flask import Flask, render_template, request, url_for, redirect, session, Response, json
 from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 import requests
@@ -47,16 +46,22 @@ def entry():
 def showCancers():
     if request.method == 'POST':
         data_dict = json.loads(request.data.decode())
-        print(data_dict)
+        print(data_dict["patientSymptoms"])
         # Query DB to get diseases associated with symptoms
         diseases = [1, 2, 3]
         medDepartment = "Oncology"
         symptoms = data_dict["patientSymptoms"]
-        # return Response(f'{{ "diseases" : {diseases}, "symptoms": {symptoms}, "medDepartment": {medDepartment} }}', headers={'Content-Type': 'application/json'})
-        # Code=303 => Make a GET Request
-        return redirect(url_for("showCancers"), code=303)
+        return json.dumps({'data': render_template (
+            "showCancers.html",
+            diseases=diseases,
+            medDepartment=medDepartment,
+            symptoms=symptoms
+        )}), 200, {'ContentType':'application/json'}
     
-    return render_template("showCancers.html")
+    # messages = json.loads(request.args['messages'])
+    return render_template (
+        "showCancers.html"
+    )
 
 '''
 END App Routes ################################################################################

@@ -46,11 +46,9 @@ $("#clearAllSymptoms").click(async () => {
 $("#symptomSelector").submit((event) => {
     event.preventDefault();
     $(".select-symptoms").each((index, item) => {
+        if (index != $(".select-symptoms").length - 1)
         symptomList.push(Number($(item).val()));
     });
-
-    console.log(symptomList);    
-    console.log(whatOptionToSelect);
     
     $.ajax({
         type: 'POST',
@@ -58,10 +56,8 @@ $("#symptomSelector").submit((event) => {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({patientSymptoms: symptomList}),
-        dataType: "text",
-        success: function (resultData) { 
-            // resultData = JSON.parse(resultData); 
-            window.location.href = "/showCancers"
+        success: function (response) {
+            document.write(response.data);
         }
     });
 });
