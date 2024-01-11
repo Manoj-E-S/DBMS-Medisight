@@ -49,12 +49,16 @@ def showCancers():
         diseases = [1, 2, 3]
         medDepartment = "Oncology"
         symptoms = data_dict["patientSymptoms"]
-        return json.dumps({'data': render_template (
-            "showCancers.html",
-            diseases=diseases,
-            medDepartment=medDepartment,
-            symptoms=symptoms
-        )}), 200, {'ContentType':'application/json'}
+
+        template_dict = {
+            'data': render_template (
+                "showCancers.html",
+                diseases=diseases,
+                medDepartment=medDepartment,
+                symptoms=symptoms
+            )
+        }
+        return json.dumps(template_dict), 200, {'ContentType':'application/json'}
     
     return render_template (
         "showCancers.html"
