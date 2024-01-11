@@ -58,7 +58,6 @@ def showCancers():
             symptoms=symptoms
         )}), 200, {'ContentType':'application/json'}
     
-    # messages = json.loads(request.args['messages'])
     return render_template (
         "showCancers.html"
     )
