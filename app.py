@@ -6,14 +6,12 @@ import os
 from functools import partial
 
 # Third-party Imports:
-from flask import Flask, render_template, request, url_for, redirect, session, Response, json
-from flask_socketio import SocketIO
-from flask_sqlalchemy import SQLAlchemy
-import requests
-from dotenv import load_dotenv
+from flask import render_template, json, request, url_for, redirect, session, Response
 
 # Custom Imports:
-# NONE
+from app_dependencies import app_setup
+from db_dependencies import models
+
 '''
 END Imports ###################################################################################
 '''
@@ -22,18 +20,18 @@ END Imports ####################################################################
 '''
 START App Configuration (Flask, Flask-Assets, etc.) ########################################### 
 '''
-app = Flask('app', static_folder='static', template_folder='templates')
-socketio = SocketIO(app)
+app = app_setup.app
+socketio = app_setup.socketio
+db = app_setup.db
 
-HOST = os.environ.get("DEV_HOST")
-PORT = os.environ.get("DEV_PORT")
+HOST = app_setup.getHost()
+PORT = app_setup.getPort()
 
 num_symptoms_selected = 1
 
 '''
 END App Configuration #########################################################################
 '''
-
 
 '''
 START App Routes ##############################################################################
