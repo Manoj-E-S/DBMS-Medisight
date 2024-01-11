@@ -1,33 +1,80 @@
 import { socket } from "./modules/utilities.js";
 
+// window.localStorage.clear();
+
 var symptomList = [];
+try {
+    var whatOptionToSelect = JSON.parse(window.localStorage.getItem("whatOptionToSelect")).value;
+} catch(err) {
+    console.error(err);
+    var whatOptionToSelect = [0];
+}
+
+$(whatOptionToSelect).each(idx => {
+    $(`#selectSymptoms${idx}`).val(whatOptionToSelect[idx]);
+});
 
 $("#addNewSymptomBtn").click(() => {
+    let selectedVal = Number($(".select-symptoms").last().val());
+    appendToWhatOptionToSelect(selectedVal);
     socket.emit('incrementSelectElementCount');
     window.location.reload();
 });
 
 $(".del-symptom-btn").click((event) => {
-    var buttonId = $(event.target).attr('id');
-    var symptomDivId = $(`#${buttonId}`).prev().attr("id");
-    $(`#${buttonId}`).remove();
-    $(`#${symptomDivId}`).remove();
+    let delBtnId = $(event.target).attr('id');
+    $(`#${delBtnId}`).remove();
+
+    let delSymptomId = $(`#${delBtnId}`).prev().attr("id");
+    $(`#${delSymptomId}`).remove();
+
+    let index = Number(delBtnId[delBtnId.length - 1]);
+    removeFromWhatOptionToSelect(index);
+
     socket.emit('decrementSelectElementCount');
+    window.location.reload();
+});
+
+$("#clearAllSymptoms").click(async () => {
+    window.localStorage.clear();
+    for(let i = 0; i < whatOptionToSelect.length - 1; i++) {
+        await socket.emit('decrementSelectElementCount');
+    }
     window.location.reload();
 });
 
 $("#symptomSelector").submit((event) => {
     event.preventDefault();
     $(".select-symptoms").each((index, item) => {
-        symptomList.push($(item).val())
+        symptomList.push(Number($(item).val()));
     });
-    console.log(symptomList);
+
+    console.log(symptomList);    
+    console.log(whatOptionToSelect);
+    
     $.ajax({
         type: 'POST',
         url: "/showCancers",
-        data: symptomList,
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({patientSymptoms: symptomList}),
         dataType: "text",
-        success: function(resultData) { alert("Save Complete") }
+        success: function (resultData) { 
+            // resultData = JSON.parse(resultData); 
+            window.location.href = "/showCancers"
+        }
     });
 });
+
+
+function appendToWhatOptionToSelect(val) {
+    whatOptionToSelect[whatOptionToSelect.length - 1] = val;
+    whatOptionToSelect.push(0);
+    window.localStorage.setItem("whatOptionToSelect", JSON.stringify({value: whatOptionToSelect}));
+}
+
+function removeFromWhatOptionToSelect(idx) {
+    whatOptionToSelect.splice(idx, 1);
+    window.localStorage.setItem("whatOptionToSelect", JSON.stringify({value: whatOptionToSelect}));
+}
 

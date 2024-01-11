@@ -4,9 +4,10 @@ START Imports ##################################################################
 # Built-in Imports:
 import os 
 from functools import partial
+import json
 
 # Third-party Imports:
-from flask import Flask, render_template, request, url_for, redirect, Response
+from flask import Flask, render_template, request, url_for, redirect, Response, jsonify
 from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 import requests
@@ -28,7 +29,7 @@ socketio = SocketIO(app)
 HOST = os.environ.get("DEV_HOST")
 PORT = os.environ.get("DEV_PORT")
 
-num_symptom_select_html_elements = 1
+num_symptoms_selected = 1
 
 '''
 END App Configuration #########################################################################
@@ -40,17 +41,22 @@ START App Routes ###############################################################
 '''
 @app.route("/")
 def entry():
-    return render_template("enterSymptoms.html", select_elements=num_symptom_select_html_elements)
+    return render_template("enterSymptoms.html", select_elements=num_symptoms_selected)
 
 @app.route("/showCancers", methods=['POST', 'GET'])
 def showCancers():
     if request.method == 'POST':
-        print(request.args)
-        return Response(headers={'Content-Type': 'json'})
-    else:
-        return render_template("showCancers.html")
-
-        # return render_template("")
+        data_dict = json.loads(request.data.decode())
+        print(data_dict)
+        # Query DB to get diseases associated with symptoms
+        diseases = [1, 2, 3]
+        medDepartment = "Oncology"
+        symptoms = data_dict["patientSymptoms"]
+        # return Response(f'{{ "diseases" : {diseases}, "symptoms": {symptoms}, "medDepartment": {medDepartment} }}', headers={'Content-Type': 'application/json'})
+        # Code=303 => Make a GET Request
+        return redirect(url_for("showCancers"), code=303)
+    
+    return render_template("showCancers.html")
 
 '''
 END App Routes ################################################################################
@@ -62,14 +68,15 @@ START Socket Ons ###############################################################
 '''
 @socketio.on("incrementSelectElementCount")
 def incrementSelectElementCount():
-    global num_symptom_select_html_elements
-    num_symptom_select_html_elements += 1
+    global num_symptoms_selected
+    num_symptoms_selected += 1
 
 
 @socketio.on("decrementSelectElementCount")
 def decrementSelectElementCount():
-    global num_symptom_select_html_elements
-    num_symptom_select_html_elements -= 1
+    global num_symptoms_selected
+    if num_symptoms_selected > 1:
+        num_symptoms_selected -= 1
 
 '''
 END Socket Ons ################################################################################

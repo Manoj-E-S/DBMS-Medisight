@@ -7,7 +7,7 @@
 
 
 {% block body %}
-    <div class="box">
+    <div class="box main-central-container">
         <form class="forms" id="symptomSelector" action="/showCancers" method="post">
             {% for i in range(select_elements) %}
                 <select class="form-control select-symptoms" name="{{'selectSymptoms' ~ i}}" id="{{'selectSymptoms' ~ i}}">
@@ -64,10 +64,19 @@
                     <option class="select-option" value="33">Difficulty swallowing</option>
                     <option class="select-option" value="34">Pain in the neck or throat</option>
                 </select>
-                <button class="btn-danger del-symptom-btn" type="button" id="{{'delSymptomBtn' ~ i}}">DELETE</button>
+                {% if i != select_elements - 1: %}
+                    <button class="btn btn-outline-danger del-symptom-btn" type="button" id="{{'delSymptomBtn' ~ i}}">
+                        <i class="fa-solid fa-trash-can"></i> Delete
+                    </button>
+                {% endif %}
             {% endfor %}
-            <button class="btn-primary" type="button" id="addNewSymptomBtn"><span class = "addNewSymptomBtnContent">+</span></button>
-            <input class="btn btn-success" type="submit" value="Search Possible Cancers" id="searchCancers">
+            <button class="btn-primary" type="button" id="addNewSymptomBtn">
+                <span id="addNewSymptomBtnContent">+</span>
+            </button>
+            <div class="box">
+                <input class="btn btn-success" type="submit" value="Search Possible Cancers" id="searchCancers">
+                <input class="btn btn-danger" type="button" value="Clear All Symptoms" id="clearAllSymptoms">
+            </div>
         </form>
     </div>
 {% endblock %}
