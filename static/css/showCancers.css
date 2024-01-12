@@ -1,11 +1,11 @@
-.accordion-weird{
+.custom-accordion {
     height: 87vh;
     width: 100%;
     background-color: var(--primary);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    justify-content: center;
     color: var(--text-light);
 }
 
@@ -46,7 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .left-wing{
@@ -63,8 +63,8 @@
     transform: translateX(-2px) rotate(-45deg);
 }
 
-.custom-accordion-button:focus .down-arrow{
-    transform: rotate(-90deg);
+.custom-accordion-item:has(.show) .custom-accordion-header .custom-accordion-button .down-arrow{
+    transform: rotate(-180deg);
 }
 
 .custom-accordion-body{

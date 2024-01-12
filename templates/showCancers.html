@@ -7,78 +7,39 @@
 
 
 {% block body %}
-<div class="accordion accordion-weird" id="accordionPanelsStayOpenExample">
-  <div class="accordion-item custom-accordion-item">
-    <h2 class="accordion-header custom-accordion-header">
-      <button class="accordion-button custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        <span><em>Leukemia</em></span><div class="down-arrow"><div class="left-wing"></div><div class="right-wing"></div></div>
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-      <div class="accordion-body custom-accordion-body">
-        <div class="symptoms-header">
-          <h5>Associated with the following symptoms:</h5>
-        </div>
-        <div class = "symptoms-list">
-          <ul>
-            <li>Shortness of breath</li>
-            <li>Unexplained weight loss</li>
-            <li>Coughing up blood</li>
-          </ul>
-        </div>
-        <div class = "disease-department">
-          <h5>Under the the medical department <h6>Oncology Department</h6></h5>
-        </div>
-      </div>
-    </div>
+<div class="accordion custom-accordion" id="accordianPanelWithOneOpen">
+  
+  {% for diseases in diseases %}    
     <div class="accordion-item custom-accordion-item">
       <h2 class="accordion-header custom-accordion-header">
-        <button class="accordion-button collapsed custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-          <span><em>Leukemia</em></span><div class="down-arrow"><div class="left-wing"></div><div class="right-wing"></div></div>
+        <button class="accordion-button custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="{{'#panelsStayOpen-collapse' ~ loop.index}}" aria-expanded="true" aria-controls="{{'panelsStayOpen-collapse' ~ loop.index}}">
+          <span><em>Leukemia</em></span>
+          <div class="down-arrow">
+            <div class="left-wing"></div>
+            <div class="right-wing"></div>
+          </div>
         </button>
       </h2>
-      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+      <div id="{{'panelsStayOpen-collapse' ~ loop.index}}" class="accordion-collapse collapse">
         <div class="accordion-body custom-accordion-body">
           <div class="symptoms-header">
-            <h5>Associated with the following symptoms: </h5>
+            <h5>Associated with the following symptoms:</h5>
           </div>
           <div class = "symptoms-list">
             <ul>
-              <li>Shortness of breath</li>
-              <li>Unexplained weight loss</li>
-              <li>Coughing up blood</li>
+              {% for symptom in symptoms %}
+                <li>{{ symptom }}</li>
+              {% endfor %}
             </ul>
           </div>
           <div class = "disease-department">
-            <h5>Under the the medical department <h6>Oncology Department</h6></h5>
+            <h5>Under the medical department: <h6>{{ medDepartment }}</h6></h5>
           </div>
         </div>
       </div>
-      <div class="accordion-item custom-accordion-item">
-        <h2 class="accordion-header custom-accordion-header">
-          <button class="accordion-button collapsed custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
-            <span><em>Leukemia</em></span><div class="down-arrow"><div class="left-wing"></div><div class="right-wing"></div></div>
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-          <div class="accordion-body custom-accordion-body">
-            <div class="symptoms-header">
-              <h5>Associated with the following symptoms: </h5>
-            </div>
-            <div class = "symptoms-list">
-              <ul>
-                <li>Shortness of breath</li>
-                <li>Unexplained weight loss</li>
-                <li>Coughing up blood</li>
-              </ul>
-            </div>
-            <div class = "disease-department">
-              <h5>Under the the medical department <h6>Oncology Department</h6></h5>
-            </div>
-          </div>
-        </div>
-  </div>
-  
+    </div>
+  {% endfor %}
+
 </div>
 {% endblock %}
 
