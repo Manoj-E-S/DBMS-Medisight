@@ -39,6 +39,10 @@ body {
     height: 87vh;
 }
 
+.text-color-dark {
+    color: var(--text-dark);
+}
+
 .select-symptoms {
     height: 4rem;
     /* margin-bottom: 1rem; */
