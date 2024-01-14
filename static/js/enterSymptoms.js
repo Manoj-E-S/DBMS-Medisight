@@ -1,18 +1,25 @@
 import { socket } from "./modules/utilities.js";
 
-// window.localStorage.clear();
+
+
+// Globals
 
 var symptomList = [];
 try {
     var whatOptionToSelect = JSON.parse(window.localStorage.getItem("whatOptionToSelect")).value;
 } catch(err) {
-    console.error(err);
     var whatOptionToSelect = [0];
 }
 
 $(whatOptionToSelect).each(idx => {
     $(`#selectSymptoms${idx}`).val(whatOptionToSelect[idx]);
 });
+
+// END Globals
+
+
+
+// Event Listeners
 
 $("#addNewSymptomBtn").click(() => {
     let selectedVal = Number($(".select-symptoms").last().val());
@@ -34,11 +41,7 @@ $(".del-symptom-btn").click((event) => {
 });
 
 $("#clearAllSymptoms").click(async () => {
-    window.localStorage.clear();
-    for(let i = 0; i < whatOptionToSelect.length - 1; i++) {
-        await socket.emit('decrementSelectElementCount');
-    }
-    window.location.reload();
+    await clearLocalStorage();
 });
 
 $("#symptomSelector").submit((event) => {
@@ -65,6 +68,11 @@ $("#symptomSelector").submit((event) => {
     });
 });
 
+// END Event Listeners
+
+
+
+// Utilities
 
 function appendToWhatOptionToSelect(val) {
     whatOptionToSelect[whatOptionToSelect.length - 1] = val;
@@ -77,3 +85,12 @@ function removeFromWhatOptionToSelect(idx) {
     window.localStorage.setItem("whatOptionToSelect", JSON.stringify({value: whatOptionToSelect}));
 }
 
+async function clearLocalStorage() {
+    window.localStorage.clear();
+    for(let i = 0; i < whatOptionToSelect.length - 1; i++) {
+        await socket.emit('decrementSelectElementCount');
+    }
+    window.location.reload();
+}
+
+// END Utilities
