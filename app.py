@@ -42,6 +42,7 @@ def entry():
 
 @app.route("/showCancers", methods=['POST', 'GET'])
 def showCancers():
+
     if request.method == 'POST':
         data_dict = json.loads(request.data.decode())
         print(data_dict["patientSymptoms"])
@@ -50,18 +51,19 @@ def showCancers():
         medDepartment = "Oncology"
         symptoms = data_dict["patientSymptoms"]
 
-        template_dict = {
-            'data': render_template (
-                "showCancers.html",
-                diseases=diseases,
-                medDepartment=medDepartment,
-                symptoms=symptoms
-            )
-        }
-        return json.dumps(template_dict), 200, {'ContentType':'application/json'}
+        return Response(
+            json.dumps({"diseases": diseases, "medDepartment": medDepartment, "symptoms": symptoms}),
+            200,
+            {'ContentType':'application/json'}
+        )
     
+
+    data_dict = json.loads(request.args["data"][:-1])
     return render_template (
-        "showCancers.html"
+        "showCancers.html",
+        diseases=data_dict["diseases"],
+        medDepartment=data_dict["medDepartment"],
+        symptoms=data_dict["symptoms"]
     )
 
 '''

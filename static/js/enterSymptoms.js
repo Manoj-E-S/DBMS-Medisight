@@ -23,10 +23,8 @@ $("#addNewSymptomBtn").click(() => {
 
 $(".del-symptom-btn").click((event) => {
     let delBtnId = $(event.target).attr('id');
-    $(`#${delBtnId}`).remove();
-
-    let delSymptomId = $(`#${delBtnId}`).prev().attr("id");
-    $(`#${delSymptomId}`).remove();
+    $(event.target).prev().remove();
+    $(event.target).remove();
 
     let index = Number(delBtnId[delBtnId.length - 1]);
     removeFromWhatOptionToSelect(index);
@@ -57,7 +55,12 @@ $("#symptomSelector").submit((event) => {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({patientSymptoms: symptomList}),
         success: function (response) {
-            document.write(response.data);
+            let queryValue = JSON.stringify(response);
+            let queryParams = new URLSearchParams(queryValue).toString();
+            window.location.href = `/showCancers?data=${queryParams}`;
+        },
+        failure: function (err) {
+            console.error(err);
         }
     });
 });
