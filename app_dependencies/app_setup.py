@@ -1,4 +1,5 @@
 import os
+from urllib.parse import quote
 
 from flask import Flask
 from flask_socketio import SocketIO
@@ -31,9 +32,9 @@ def getPort():
 
 def getDbCreds():
     db_username = os.environ.get("db_username")
-    db_password = os.environ.get("db_password")
+    db_password_encoded = quote(os.environ.get("db_password"))
     db_name = os.environ.get("db_name")
-    return db_username, db_password, db_name
+    return db_username, db_password_encoded, db_name
 
 
 # Constants

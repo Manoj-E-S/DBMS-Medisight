@@ -6,11 +6,11 @@ import os
 from functools import partial
 
 # Third-party Imports:
-from flask import render_template, json, request, url_for, redirect, session, Response
+from flask import render_template, json, jsonify, request, url_for, redirect, session, Response
 
 # Custom Imports:
 from app_dependencies import app_setup
-from db_dependencies import models
+from db_dependencies.models import Departments, Doctors, Tests, Symptoms, Diseases, DiseaseSymptoms
 
 '''
 END Imports ###################################################################################
@@ -45,25 +45,40 @@ def showCancers():
 
     if request.method == 'POST':
         data_dict = json.loads(request.data.decode())
-        print(data_dict["patientSymptoms"])
-        # Query DB to get diseases associated with symptoms
-        diseases = [1, 2, 3]
-        medDepartment = "Oncology"
         symptoms = data_dict["patientSymptoms"]
 
-        return Response(
-            json.dumps({"diseases": diseases, "medDepartment": medDepartment, "symptoms": symptoms}),
-            200,
-            {'ContentType':'application/json'}
-        )
+        try:
+            query_result = (
+                db.session.query(Diseases, Departments.department_name, Symptoms)
+                .join(Departments, Diseases.department_id == Departments.department_id)
+                .join(DiseaseSymptoms, Diseases.disease_id == DiseaseSymptoms.disease_id)
+                .join(Symptoms, DiseaseSymptoms.symptom_id == Symptoms.symptom_id)
+                .filter(Symptoms.symptom_id.in_(symptoms))
+                .all()
+            )
+
+            # Organise Result Dict
+            result = {}
+            for disease, department_name, symptom in query_result:
+                if disease.disease_name not in result:
+                    result[disease.disease_name] = {
+                        'disease_desc': disease.disease_desc,
+                        'department_name': department_name,
+                        'symptoms': []
+                    }
+
+                result[disease.disease_name]['symptoms'].append(symptom.symptom_name)
+
+            return jsonify(result)
+
+        except Exception as e:
+            return jsonify({'error': str(e)})
     
 
     data_dict = json.loads(request.args["data"][:-1])
     return render_template (
         "showCancers.html",
-        diseases=data_dict["diseases"],
-        medDepartment=data_dict["medDepartment"],
-        symptoms=data_dict["symptoms"]
+        data_dict=data_dict
     )
 
 '''

@@ -8,7 +8,7 @@ var symptomList = [];
 try {
     var whatOptionToSelect = JSON.parse(window.localStorage.getItem("whatOptionToSelect")).value;
 } catch(err) {
-    var whatOptionToSelect = [0];
+    var whatOptionToSelect = [1];
 }
 
 $(whatOptionToSelect).each(idx => {
@@ -57,8 +57,8 @@ $("#symptomSelector").submit((event) => {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({patientSymptoms: symptomList}),
-        success: function (response) {
-            let queryValue = JSON.stringify(response);
+        success: function (res) {
+            let queryValue = JSON.stringify(res);
             let queryParams = new URLSearchParams(queryValue).toString();
             window.location.href = `/showCancers?data=${queryParams}`;
         },
@@ -76,7 +76,7 @@ $("#symptomSelector").submit((event) => {
 
 function appendToWhatOptionToSelect(val) {
     whatOptionToSelect[whatOptionToSelect.length - 1] = val;
-    whatOptionToSelect.push(0);
+    whatOptionToSelect.push(1);
     window.localStorage.setItem("whatOptionToSelect", JSON.stringify({value: whatOptionToSelect}));
 }
 

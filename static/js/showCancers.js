@@ -3,6 +3,8 @@
 
 console.log("showCancers");
 
+//
+
 // $(".tests-btn").click((event) => {
 //     let queryValue = JSON.stringify({disease: medDepartment});
 //     let queryParams = new URLSearchParams(queryValue).toString();

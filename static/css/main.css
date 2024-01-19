@@ -32,12 +32,14 @@ body {
 .box {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
 .main-central-container {
-    height: 87vh;
+    height: auto;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
 }
 
 .text-color-dark {

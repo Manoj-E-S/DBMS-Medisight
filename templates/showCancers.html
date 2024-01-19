@@ -9,11 +9,11 @@
 {% block body %}
 <div class="accordion custom-accordion" id="accordianPanelWithOneOpen">
 
-  {% for diseases in diseases %}    
+  {% for disease_name in data_dict %}    
     <div class="accordion-item custom-accordion-item">
       <h2 class="accordion-header custom-accordion-header">
         <button class="accordion-button custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="{{'#panelsStayOpen-collapse' ~ loop.index}}" aria-expanded="true" aria-controls="{{'panelsStayOpen-collapse' ~ loop.index}}">
-          <span><em>Leukemia</em></span>
+          <span><em>{{ disease_name }}</em></span>
           <div class="down-arrow">
             <div class="left-wing"></div>
             <div class="right-wing"></div>
@@ -33,13 +33,14 @@
           </div>
           <div class = "symptoms-list">
             <ul>
-              {% for symptom in symptoms %}
+              {% for symptom in data_dict[disease_name]['symptoms'] %}
                 <li>{{ symptom }}</li>
               {% endfor %}
             </ul>
           </div>
           <div class = "disease-department">
-            <h5>Under the medical department: <h6>{{ medDepartment }}</h6></h5>
+            <h5>Description: <h6>{{ data_dict[disease_name]['disease_desc'] }}</h6></h5>
+            <h5>Under the medical department: <h6>{{ data_dict[disease_name]['department_name'] }}</h6></h5>
           </div>
         </div>
       </div>
