@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+
+
+{% block title %}
+    Medisight
+{% endblock %}
+
+
+{% block body %}
+<div class="accordion custom-accordion" id="accordianPanelWithOneOpen">
+
+    {% for test_name in data_dict %}    
+      <div class="accordion-item custom-accordion-item">
+        <h2 class="accordion-header custom-accordion-header">
+          <button class="accordion-button custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="{{'#panelsStayOpen-collapse' ~ loop.index}}" aria-expanded="true" aria-controls="{{'panelsStayOpen-collapse' ~ loop.index}}">
+            <span><em>{{ test_name }}</em></span>
+            <div class="down-arrow">
+              <div class="left-wing"></div>
+              <div class="right-wing"></div>
+            </div>
+          </button>
+        </h2>
+        <div id="{{'panelsStayOpen-collapse' ~ loop.index}}" class="accordion-collapse collapse">
+          <div class="accordion-body custom-accordion-body">
+            <div class = "test-department">
+              <h5>Description: <h6>{{ data_dict[test_name]['test_desc'] }}</h6></h5>
+              <h5>Under the medical department: <h6>{{ data_dict[test_name]['department_name'] }}</h6></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  
+</div>
+{% endblock %}
+
+
+{% block custom_css %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/showTests.css') }}">
+{% endblock %}
+
+
+{% block custom_js %}
+    <script type="module" src="{{ url_for('static', filename='js/showTests.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,80 @@
+.custom-accordion {
+    height: auto;
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--text-light);
+}
+
+.custom-accordion-item{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--primary-light);
+    margin-bottom: 30px;
+}
+
+.custom-accordion-header{
+    background-color: var(--primary-light);
+}
+
+.custom-accordion-button{
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-accordion-button:focus{
+    outline: none;
+}
+
+.custom-accordion-button span{
+    color: var(--text-light);
+}
+
+.down-arrow{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+.left-wing{
+    background-color: var(--text-light);
+    width: 15px;
+    height: 2px;
+    transform: translateX(2px) rotate(45deg);
+}
+
+.right-wing{
+    background-color: var(--text-light);
+    width: 15px;
+    height: 2px;
+    transform: translateX(-2px) rotate(-45deg);
+}
+
+.custom-accordion-item:has(.show) .custom-accordion-header .custom-accordion-button .down-arrow{
+    transform: rotate(-180deg);
+}
+
+.custom-accordion-body{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.test-department{
+    width: 100%;
+}

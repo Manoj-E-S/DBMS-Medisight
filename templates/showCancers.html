@@ -40,7 +40,7 @@
           </div>
           <div class = "disease-department">
             <h5>Description: <h6>{{ data_dict[disease_name]['disease_desc'] }}</h6></h5>
-            <h5>Under the medical department: <h6>{{ data_dict[disease_name]['department_name'] }}</h6></h5>
+            <h5>Under the medical department: <h6 id="{{'deptName' ~ loop.index}}">{{ data_dict[disease_name]['department_name'] }}</h6></h5>
           </div>
         </div>
       </div>

@@ -72,6 +72,7 @@ def showCancers():
             return jsonify(result)
 
         except Exception as e:
+            print(f"Exception Occured:\n{e}")
             return jsonify({'error': str(e)})
     
 
@@ -80,6 +81,65 @@ def showCancers():
         "showCancers.html",
         data_dict=data_dict
     )
+
+
+@app.route("/showTests/<string:disease_name>")
+def showTests(disease_name):
+    try:
+        query_result = (
+            db.session.query(Tests, Departments.department_name)
+            .join(Diseases, Tests.test_id == Diseases.test_id)
+            .join(Departments, Diseases.department_id == Departments.department_id)
+            .filter(Diseases.disease_name == disease_name)
+            .all()
+        )
+
+        # Organise Result Dict
+        result = {}
+        for test, department_name in query_result:
+            if test.test_name not in result:
+                result[test.test_name] = {
+                    'test_desc': test.test_desc,
+                    'department_name': department_name
+                }
+
+        return render_template("showTests.html", data_dict=result)
+
+    except Exception as e:
+        print(f"Exception Occured:\n{e}")
+        return jsonify({'error': str(e)})
+
+
+@app.route("/showDoctors/<string:department_name>")
+def showDoctors(department_name):
+    try:
+        query_result = (
+            db.session.query(Doctors, Departments.department_name)
+            .join(Departments, Doctors.department_id == Departments.department_id)
+            .filter(Departments.department_name == department_name)
+            .all()
+        )
+
+        print(query_result)
+
+        # Organise Result Dict
+        result = {}
+        for doctor, department_name in query_result:
+            if doctor.doctor_name not in result:
+                result[doctor.doctor_name] = {
+                    'doctor_phno': doctor.doctor_phno,
+                    'doctor_office_no': doctor.doctor_office_no,
+                    'doctor_office_address': doctor.doctor_office_address,
+                    'department_name': department_name
+                }
+
+        print(result)
+
+        return render_template("showDoctors.html", data_dict=result)
+
+    except Exception as e:
+        print(f"Exception Occured:\n{e}")
+        return jsonify({'error': str(e)})
 
 '''
 END App Routes ################################################################################

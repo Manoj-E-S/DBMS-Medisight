@@ -1,0 +1,47 @@
+{% extends "_base.html" %}
+
+
+{% block title %}
+    Medisight
+{% endblock %}
+
+
+{% block body %}
+<div class="accordion custom-accordion" id="accordianPanelWithOneOpen">
+
+    {% for doctor_name in data_dict %}    
+      <div class="accordion-item custom-accordion-item">
+        <h2 class="accordion-header custom-accordion-header">
+          <button class="accordion-button custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="{{'#panelsStayOpen-collapse' ~ loop.index}}" aria-expanded="true" aria-controls="{{'panelsStayOpen-collapse' ~ loop.index}}">
+            <span>{{ doctor_name }}</span>
+            <div class="down-arrow">
+              <div class="left-wing"></div>
+              <div class="right-wing"></div>
+            </div>
+          </button>
+        </h2>
+        <div id="{{'panelsStayOpen-collapse' ~ loop.index}}" class="accordion-collapse collapse">
+          <div class="accordion-body custom-accordion-body">
+            <div class = "doc-details">
+              <h5>Personal Phone: <em>{{ data_dict[doctor_name]['doctor_phno'] }}</em></h5>
+              <h5>Office Phone: <em>{{ data_dict[doctor_name]['doctor_office_no'] }}</em></h5>
+              <h5>Office Address: <em>{{ data_dict[doctor_name]['doctor_office_address'] }}</em></h5>
+              <h5>Under the medical department: <em>{{ data_dict[doctor_name]['department_name'] }}</em></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  
+</div>
+{% endblock %}
+
+
+{% block custom_css %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/showDoctors.css') }}">
+{% endblock %}
+
+
+{% block custom_js %}
+    <script type="module" src="{{ url_for('static', filename='js/showDoctors.js') }}"></script>
+{% endblock %}
