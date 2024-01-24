@@ -34,15 +34,15 @@ def getDbCreds():
     db_username = os.environ.get("db_username")
     db_password_encoded = quote(os.environ.get("db_password"))
     db_name = os.environ.get("db_name")
-    return db_username, db_password_encoded, db_name
+    db_host = os.environ.get("db_host")
+    return db_username, db_password_encoded, db_name, db_host
 
 
 # Constants
-HOST = getHost()
-db_username, db_password, db_name = getDbCreds()
+db_username, db_password, db_name, db_host = getDbCreds()
 
 app = Flask('app', static_folder='static', template_folder='templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_username}:{db_password}@{HOST}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_username}:{db_password}@{db_host}/{db_name}'
 
 db = SQLAlchemy(app, model_class=Base)
 socketio = SocketIO(app)
