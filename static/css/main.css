@@ -6,12 +6,17 @@
     --text-disabled-light: #AAAAAA;
     --select-option: #AAAAAA;
     --text-dark: #353535;
+    --bg-warn: #ffff00bb;
 }
 
 body {
     margin: 0;
     padding: 0;
     background-color: var(--primary);
+}
+
+label {
+    color: var(--text-light);
 }
 
 .header,
@@ -36,6 +41,17 @@ body {
     justify-content: center;
 }
 
+.box-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-warning {
+    background-color: var(--bg-warn);
+}
+
 .main-central-container {
     height: auto;
     padding-top: 2rem;
@@ -44,6 +60,10 @@ body {
 
 .text-color-dark {
     color: var(--text-dark);
+}
+
+.text-color-light {
+    color: var(--text-light);
 }
 
 .select-symptoms {

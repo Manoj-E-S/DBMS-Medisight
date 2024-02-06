@@ -1,0 +1,63 @@
+{% extends "_base.html" %}
+
+
+{% block title %}
+    Medisight
+{% endblock %}
+
+
+{% block body %}
+<div class="box-column mt-3 mb-3">
+    <form id="doctorRegisterForm" action="/registerDoctor" method="post">
+        <div class="form-group">
+            <label for="doctorName">Name</label>
+            <input type="text" class="form-control" id="doctorName" aria-describedby="nameHelp" placeholder="John K Doe">
+            <small id="nameHelp" class="form-text text-muted">Name as per your official documents.</small>
+        </div>
+        <div class="form-group">
+            <label for="doctorPhno">Phone Number</label>
+            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="doctorPhno" aria-describedby="phnoHelp" placeholder="999-999-9999">
+            <small id="phnoHelp" class="form-text text-muted">10 digit phone number.</small>
+        </div>
+        <div class="form-group">
+            <label for="doctorOfficeNo">Office Number</label>
+            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="doctorOfficeNo" aria-describedby="officeNoHelp" placeholder="888-888-8888">
+            <small id="officeNoHelp" class="form-text text-muted">10 digit phone number.</small>
+        </div>
+        <div class="form-group">
+            <label for="doctorOfficeAddress">Office Address</label>
+            <input type="text" class="form-control" id="doctorOfficeAddress" aria-describedby="addressHelp" placeholder="123 Alp St">
+            <small id="addressHelp" class="form-text text-muted">Address of your clinic/hospital.</small>
+        </div>
+        <label for="departmentId">Department</label>
+        <select class="form-control" id="departmentId" aria-describedby="departmentHelp">
+            <option value="2">Oncology</option>
+            <option value="3">Cardiology</option>
+            <option value="4">Gastroenterology</option>
+            <option value="5">Urology</option>
+            <option value="6">Gynecology</option>
+            <option value="7">Pulmonology</option>
+            <option value="8">Dermatology</option>
+            <option value="9">Hematology</option>
+            <option value="10">Orthopedics</option>
+            <option value="11">Endocrinology</option>
+        </select>
+        <small id="departmentHelp" class="form-text text-muted">Your Medical Department.</small>
+
+        <div class="box mt-4">
+            <button type="submit" id="doctorRegister" class="btn btn-success mr-1">Register</button>
+            <button type="button" id="cancelRegister" class="btn btn-outline-danger ml-1">Cancel</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block custom_css %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/registerDoctor.css') }}">
+{% endblock %}
+
+
+{% block custom_js %}
+    <script type="module" src="{{url_for('static', filename='js/registerDoctor.js')}}"></script>
+{% endblock %}

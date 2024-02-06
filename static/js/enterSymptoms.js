@@ -68,6 +68,10 @@ $("#symptomSelector").submit((event) => {
     });
 });
 
+$("#registerDoctor").click(() => {
+    window.location.href = "/registerDoctor";
+});
+
 // END Event Listeners
 
 

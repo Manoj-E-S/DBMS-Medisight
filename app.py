@@ -2,6 +2,7 @@
 START Imports #################################################################################
 '''
 # Built-in Imports:
+from crypt import methods
 import os 
 from functools import partial
 
@@ -39,6 +40,26 @@ START App Routes ###############################################################
 @app.route("/")
 def entry():
     return render_template("enterSymptoms.html", select_elements=num_symptoms_selected)
+
+
+@app.route("/registerDoctor", methods=['POST', 'GET'])
+def registerDoctor():
+    if request.method == 'POST':
+        data_dict = json.loads(request.data.decode())
+
+        doctor = Doctors(
+            doctor_name=data_dict["doctorName"], 
+            doctor_phno=data_dict["doctorPhno"], 
+            doctor_office_no=data_dict["doctorOfficeNo"], 
+            doctor_office_address=data_dict["doctorOfficeAddress"], 
+            department_id=data_dict["departmentId"]
+        )
+        db.session.add(doctor)
+        db.session.commit()
+        return jsonify({"status":"Doctor Registered Successfully"})
+    
+    return render_template("registerDoctor.html")
+
 
 @app.route("/showCancers", methods=['POST', 'GET'])
 def showCancers():
