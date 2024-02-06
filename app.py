@@ -11,7 +11,7 @@ from flask import render_template, json, jsonify, request, url_for, redirect, se
 
 # Custom Imports:
 from app_dependencies import app_setup
-from db_dependencies.models import Departments, Doctors, Tests, Symptoms, Diseases, DiseaseSymptoms
+from db_dependencies.models import Departments, DiseaseTests, Doctors, Tests, Symptoms, Diseases, DiseaseSymptoms
 
 '''
 END Imports ###################################################################################
@@ -109,7 +109,8 @@ def showTests(disease_name):
     try:
         query_result = (
             db.session.query(Tests, Departments.department_name)
-            .join(Diseases, Tests.test_id == Diseases.test_id)
+            .join(DiseaseTests, Tests.test_id == DiseaseTests.test_id)
+            .join(Diseases, DiseaseTests.disease_id == Diseases.disease_id)
             .join(Departments, Diseases.department_id == Departments.department_id)
             .filter(Diseases.disease_name == disease_name)
             .all()

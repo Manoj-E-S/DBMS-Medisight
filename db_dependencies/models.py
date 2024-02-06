@@ -66,7 +66,6 @@ class Diseases(db.Model):
     disease_name: Mapped[str] = mapped_column(String, nullable=False)
     disease_desc: Mapped[str] = mapped_column(String)
     department_id: Mapped[int] = mapped_column(ForeignKey(Departments.department_id), nullable=False)
-    test_id: Mapped[int] = mapped_column(ForeignKey(Tests.test_id), nullable=False)
 
     def __repr__(self):
         return f'<Disease {self.disease_name} - {self.disease_desc}>'
@@ -79,4 +78,14 @@ class DiseaseSymptoms(db.Model):
     symptom_id: Mapped[int] = mapped_column(ForeignKey(Symptoms.symptom_id), primary_key=True, nullable=False)
 
     def __repr__(self):
-        return f'<DiseaseSymptom: {self.disease_id} - {self.symptom_id}>'
+        return f'<DiseaseSymptom: D({self.disease_id}) - S({self.symptom_id})>'
+    
+
+class DiseaseTests(db.Model):
+    __tablename__ = "diseaseTests"
+
+    disease_id: Mapped[int] = mapped_column(ForeignKey(Diseases.disease_id), primary_key=True, nullable=False)
+    test_id: Mapped[int] = mapped_column(ForeignKey(Tests.test_id), primary_key=True, nullable=False)
+
+    def __repr__(self):
+        return f'<DiseaseTest: D({self.disease_id}) - T({self.test_id})>'

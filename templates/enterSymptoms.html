@@ -7,12 +7,13 @@
 
 
 {% block body %}
-    <div class="box background-warning">
+    <div class="box background-warning" id="topNotification">
         <h5 class="p-2 m-2">Are you a doctor, just starting off your private clinic?</h5>
         <input class="btn btn-info p-2 m-2" type="button" value="Register Here" id="registerDoctor">
+        <input class="btn btn-outline-dark p-2 m-2" type="button" value="Dismiss" id="dismissTopNotification">
     </div>
     <div class="box-column main-central-container">
-        <h3 class="text-color-light p-2 m-2">Enlist your symptoms</h3>
+        <h3 class="text-color-light pb-2">Enlist your symptoms</h3>
         <form class="forms" id="symptomSelector" action="/showCancers" method="post">
             {% for i in range(select_elements) %}
                 {% if i != select_elements - 1: %}

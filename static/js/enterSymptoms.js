@@ -72,6 +72,10 @@ $("#registerDoctor").click(() => {
     window.location.href = "/registerDoctor";
 });
 
+$("#dismissTopNotification").click(() => {
+    $("#topNotification").remove();
+});
+
 // END Event Listeners
 
 
