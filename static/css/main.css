@@ -19,6 +19,11 @@ label {
     color: var(--text-light);
 }
 
+legend {
+    text-align: center;
+    font-size: 160%;
+}
+
 .header,
 .footer {
     padding: 5px;
@@ -46,6 +51,11 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.box-space-evenly {
+    align-items: flex-start;
+    justify-content: space-evenly;
 }
 
 .background-warning {

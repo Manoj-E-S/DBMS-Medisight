@@ -9,42 +9,69 @@
 {% block body %}
 <div class="box-column mt-3 mb-3">
     <form id="doctorRegisterForm" action="/registerDoctor" method="post">
-        <div class="form-group">
-            <label for="doctorName">Name</label>
-            <input type="text" class="form-control" id="doctorName" aria-describedby="nameHelp" placeholder="John K Doe">
-            <small id="nameHelp" class="form-text text-muted">Name as per your official documents.</small>
+        <div class="box box-space-evenly form-holder">
+            <div class="create-an-account">
+                <legend class="text-light">Account Details</legend>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="johndoe">
+                    <small id="usernameHelp" class="form-text text-muted">Unique username.</small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="johndoe@xyz.com">
+                    <small id="emailHelp" class="form-text text-muted">Your email ID.</small>
+                </div>
+                <div class="form-group">
+                    <label for="pswd">Password</label>
+                    <input type="password" class="form-control" id="pswd" aria-describedby="pswdHelp" placeholder="P@ssword">
+                    <small id="pswdHelp" class="form-text text-muted">At least 8 characters; should contain at least 1 each of capital letter, special character.</small>
+                </div>
+                <div class="form-group">
+                    <label for="cpswd">Confirm Password</label>
+                    <input type="password" class="form-control" id="cpswd" aria-describedby="cpswdHelp" placeholder="P@ssword">
+                    <small id="cpswdHelp" class="form-text text-muted">Re-enter the password.</small>
+                </div>
+            </div>
+            <div class="professional-info">
+                <legend class="text-light">Professional Details</legend>
+                <div class="form-group">
+                    <label for="doctorName">Name</label>
+                    <input type="text" class="form-control" id="doctorName" aria-describedby="nameHelp" placeholder="John K Doe">
+                    <small id="nameHelp" class="form-text text-muted">Name as per your official documents.</small>
+                </div>
+                <div class="form-group">
+                    <label for="doctorPhno">Phone Number</label>
+                    <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="doctorPhno" aria-describedby="phnoHelp" placeholder="999-999-9999">
+                    <small id="phnoHelp" class="form-text text-muted">10 digit phone number.</small>
+                </div>
+                <div class="form-group">
+                    <label for="doctorOfficeNo">Office Number</label>
+                    <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="doctorOfficeNo" aria-describedby="officeNoHelp" placeholder="888-888-8888">
+                    <small id="officeNoHelp" class="form-text text-muted">10 digit phone number.</small>
+                </div>
+                <div class="form-group">
+                    <label for="doctorOfficeAddress">Office Address</label>
+                    <input type="text" class="form-control" id="doctorOfficeAddress" aria-describedby="addressHelp" placeholder="123 Alp St">
+                    <small id="addressHelp" class="form-text text-muted">Address of your clinic/hospital.</small>
+                </div>
+                <label for="departmentId">Department</label>
+                <select class="form-control" id="departmentId" aria-describedby="departmentHelp">
+                    <option value="2">Oncology</option>
+                    <option value="3">Cardiology</option>
+                    <option value="4">Gastroenterology</option>
+                    <option value="5">Urology</option>
+                    <option value="6">Gynecology</option>
+                    <option value="7">Pulmonology</option>
+                    <option value="8">Dermatology</option>
+                    <option value="9">Hematology</option>
+                    <option value="10">Orthopedics</option>
+                    <option value="11">Endocrinology</option>
+                </select>
+                <small id="departmentHelp" class="form-text text-muted">Your Medical Department.</small>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="doctorPhno">Phone Number</label>
-            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="doctorPhno" aria-describedby="phnoHelp" placeholder="999-999-9999">
-            <small id="phnoHelp" class="form-text text-muted">10 digit phone number.</small>
-        </div>
-        <div class="form-group">
-            <label for="doctorOfficeNo">Office Number</label>
-            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="doctorOfficeNo" aria-describedby="officeNoHelp" placeholder="888-888-8888">
-            <small id="officeNoHelp" class="form-text text-muted">10 digit phone number.</small>
-        </div>
-        <div class="form-group">
-            <label for="doctorOfficeAddress">Office Address</label>
-            <input type="text" class="form-control" id="doctorOfficeAddress" aria-describedby="addressHelp" placeholder="123 Alp St">
-            <small id="addressHelp" class="form-text text-muted">Address of your clinic/hospital.</small>
-        </div>
-        <label for="departmentId">Department</label>
-        <select class="form-control" id="departmentId" aria-describedby="departmentHelp">
-            <option value="2">Oncology</option>
-            <option value="3">Cardiology</option>
-            <option value="4">Gastroenterology</option>
-            <option value="5">Urology</option>
-            <option value="6">Gynecology</option>
-            <option value="7">Pulmonology</option>
-            <option value="8">Dermatology</option>
-            <option value="9">Hematology</option>
-            <option value="10">Orthopedics</option>
-            <option value="11">Endocrinology</option>
-        </select>
-        <small id="departmentHelp" class="form-text text-muted">Your Medical Department.</small>
-
-        <div class="box mt-4">
+        <div class="box mt-4 mb-5">
             <button type="submit" id="doctorRegister" class="btn btn-success mr-1">Register</button>
             <button type="button" id="cancelRegister" class="btn btn-outline-danger ml-1">Cancel</button>
         </div>
