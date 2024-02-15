@@ -42,6 +42,11 @@ def entry():
     return render_template("enterSymptoms.html", select_elements=num_symptoms_selected)
 
 
+@app.route("/doctorDashboard")
+def doctorDashboard():
+    return render_template("doctorDashboard.html")
+
+
 @app.route("/registerDoctor", methods=['POST', 'GET'])
 def registerDoctor():
     if request.method == 'POST':
