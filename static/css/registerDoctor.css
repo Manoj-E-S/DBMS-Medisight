@@ -3,8 +3,23 @@
     width: 100vw;
 }
 
-.create-an-account,
+.create-an-account {
+    background-color: var(--primary-light);
+    border-radius: 25px;
+    width: 40%;
+    margin: 0.7rem 0 0 4rem;
+    padding: 0 2rem 0;
+}
+
 .professional-info {
-    width: 50%;
+    width: 60%;
     padding: 0 6rem 0;
+}
+
+#doctorRegister {
+    width: 65%;
+}
+
+#cancelRegister {
+    width: 35%;
 }

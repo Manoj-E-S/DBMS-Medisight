@@ -1,7 +1,6 @@
 import { socket } from "./modules/utilities.js";
 
 
-
 // Globals
 
 var symptomList = [];
@@ -16,6 +15,13 @@ $(whatOptionToSelect).each(idx => {
 });
 
 // END Globals
+
+
+// Initial Action
+if(doctor_registered) {
+    alert("Profile Submitted successfully");
+    window.location = '/';
+}
 
 
 

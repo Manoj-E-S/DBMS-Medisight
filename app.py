@@ -39,7 +39,18 @@ START App Routes ###############################################################
 '''
 @app.route("/")
 def entry():
-    return render_template("enterSymptoms.html", select_elements=num_symptoms_selected)
+    if request.args.get("doctor_registered"):
+        return render_template(
+            "enterSymptoms.html",
+            select_elements=num_symptoms_selected,
+            doctor_registered=request.args["doctor_registered"]
+        )
+    
+    return render_template(
+        "enterSymptoms.html",
+        select_elements=num_symptoms_selected,
+        doctor_registered="false"
+    )
 
 
 @app.route("/doctorDashboard")
@@ -50,7 +61,9 @@ def doctorDashboard():
 @app.route("/registerDoctor", methods=['POST', 'GET'])
 def registerDoctor():
     if request.method == 'POST':
-        data_dict = json.loads(request.data.decode())
+        data_dict = request.form
+
+        print(data_dict)
 
         doctor = Doctors(
             doctor_name=data_dict["doctorName"], 
@@ -61,7 +74,8 @@ def registerDoctor():
         )
         db.session.add(doctor)
         db.session.commit()
-        return jsonify({"status":"Doctor Registered Successfully"})
+        return redirect(url_for("entry", doctor_registered="true"))
+        
     
     return render_template("registerDoctor.html")
 

@@ -8,8 +8,8 @@
 
 {% block body %}
     <div class="box background-warning" id="topNotification">
-        <h5 class="p-2 m-2">Are you a doctor, just starting off your private clinic?</h5>
-        <input class="btn btn-info p-2 m-2" type="button" value="Register Here" id="registerDoctor">
+        <h5 class="p-2 m-2">Are you a doctor? Share your profile with Medisight.</h5>
+        <input class="btn btn-info p-2 m-2" type="button" value="Submit Profile" id="registerDoctor">
         <input class="btn btn-outline-dark p-2 m-2" type="button" value="Dismiss" id="dismissTopNotification">
     </div>
     <div class="box-column main-central-container">
@@ -162,5 +162,8 @@
 
 
 {% block custom_js %}
+    <script>
+        var doctor_registered = {{ doctor_registered }} ;
+    </script>
     <script type="module" src="{{url_for('static', filename='js/enterSymptoms.js')}}"></script>
 {% endblock %}

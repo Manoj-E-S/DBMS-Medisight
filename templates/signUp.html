@@ -1,0 +1,49 @@
+{% extends "_base.html" %}
+
+
+{% block title %}
+    Medisight
+{% endblock %}
+
+
+{% block body %}
+<div class="box-column mt-3 mb-3">
+    <form id="doctorRegisterForm" action="/registerDoctor" method="post">
+        <div class="box box-space-evenly form-holder">
+            <div class="create-an-account">
+                <legend class="text-light">Sign Up</legend>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="johndoe">
+                    <small id="usernameHelp" class="form-text text-muted">Unique username.</small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="johndoe@xyz.com">
+                    <small id="emailHelp" class="form-text text-muted">Your email ID.</small>
+                </div>
+                <div class="form-group">
+                    <label for="pswd">Password</label>
+                    <input type="password" class="form-control" id="pswd" aria-describedby="pswdHelp" placeholder="P@ssword">
+                    <small id="pswdHelp" class="form-text text-muted">At least 8 characters; should contain at least 1 each of capital letter, special character.</small>
+                </div>
+                <div class="form-group">
+                    <label for="cpswd">Confirm Password</label>
+                    <input type="password" class="form-control" id="cpswd" aria-describedby="cpswdHelp" placeholder="P@ssword">
+                    <small id="cpswdHelp" class="form-text text-muted">Re-enter the password.</small>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block custom_css %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/signUp.css') }}">
+{% endblock %}
+
+
+{% block custom_js %}
+    <script type="module" src="{{url_for('static', filename='js/signUp.js')}}"></script>
+{% endblock %}
