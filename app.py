@@ -2,7 +2,6 @@
 START Imports #################################################################################
 '''
 # Built-in Imports:
-from crypt import methods
 import os 
 from functools import partial
 
@@ -47,6 +46,13 @@ def registerDoctor():
     if request.method == 'POST':
         data_dict = json.loads(request.data.decode())
 
+        """
+        insert into doctors
+        (doctor_name, doctor_phno, doctor_office_no, doctor_office_address, department_id)
+        values
+        (user input values from the form);
+        """
+        
         doctor = Doctors(
             doctor_name=data_dict["doctorName"], 
             doctor_phno=data_dict["doctorPhno"], 
@@ -69,6 +75,15 @@ def showCancers():
         symptoms = data_dict["patientSymptoms"]
 
         try:
+            """
+            select diseases.*, departments.department_name, symptoms.*
+            from diseases
+            join departments on diseases.department_id = departments.department_id
+            join diseaseSymptoms on diseases.disease_id = diseaseSymptoms.disease_id
+            join symptoms on diseaseSymptoms.symptom_id = symptoms.symptom_id
+            where symptoms.symptom_id in (LIST of user selected symptom_ids);
+            """
+
             query_result = (
                 db.session.query(Diseases, Departments.department_name, Symptoms)
                 .join(Departments, Diseases.department_id == Departments.department_id)
@@ -107,6 +122,15 @@ def showCancers():
 @app.route("/showTests/<string:disease_name>")
 def showTests(disease_name):
     try:
+        """
+        select tests.*, departments.department_name
+        from tests
+        join diseaseTests on tests.test_id = diseaseTests.test_id
+        join diseases on diseaseTests.disease_id = diseases.disease_id
+        join departments on diseases.department_id = departments.department_id
+        where diseases.disease_name = (User input disease name);
+        """
+
         query_result = (
             db.session.query(Tests, Departments.department_name)
             .join(DiseaseTests, Tests.test_id == DiseaseTests.test_id)
@@ -135,6 +159,13 @@ def showTests(disease_name):
 @app.route("/showDoctors/<string:department_name>")
 def showDoctors(department_name):
     try:
+        """
+        select doctors.*, departments.department_name
+        from doctors
+        join departments on doctors.department_id = departments.department_id
+        where departments.department_name = (User input department name);
+        """
+
         query_result = (
             db.session.query(Doctors, Departments.department_name)
             .join(Departments, Doctors.department_id == Departments.department_id)
