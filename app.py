@@ -2,7 +2,6 @@
 START Imports #################################################################################
 '''
 # Built-in Imports:
-from crypt import methods
 import os 
 from functools import partial
 
@@ -56,6 +55,26 @@ def entry():
 @app.route("/doctorDashboard")
 def doctorDashboard():
     return render_template("doctorDashboard.html")
+
+
+@app.route("/signUp", methods=['POST', 'GET'])
+def signUp():
+    if request.method == 'POST':
+        data_dict = request.form
+        print(data_dict)
+        return redirect(url_for("login"))
+
+    return render_template("signUp.html")
+
+
+@app.route("/login", methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        data_dict = request.form
+        print(data_dict)
+        return redirect(url_for("doctorDashboard"))
+    
+    return render_template("login.html")
 
 
 @app.route("/registerDoctor", methods=['POST', 'GET'])

@@ -111,6 +111,11 @@ legend {
     text-align: center;
 }
 
+.form-holder {
+    height: 100%;
+    width: 100vw;
+}
+
 .del-symptom-btn{
     margin-bottom: 2rem;
 }

@@ -1,0 +1,15 @@
+.login-to-account {
+    background-color: var(--primary-light);
+    border-radius: 25px;
+    width: 55%;
+    margin: 2rem 0 4rem;
+    padding: 0 2rem 0;
+}
+
+#loginBtn {
+    width: 65%;
+}
+
+#cancelLoginBtn {
+    width: 35%;
+}
