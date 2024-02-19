@@ -78,8 +78,12 @@ $("#registerDoctor").click(() => {
     window.location.href = "/registerDoctor";
 });
 
-$("#dismissTopNotification").click(() => {
-    $("#topNotification").remove();
+$("#signUpPageLink").click(() => {
+    window.location.href = "/signUp";
+});
+
+$("#loginPageLink").click(() => {
+    window.location.href = "/login";
 });
 
 // END Event Listeners

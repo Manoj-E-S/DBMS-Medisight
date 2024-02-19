@@ -26,6 +26,16 @@ legend {
     font-size: 200%;
 }
 
+a.no-decoration {
+    color: var(--text-dark);
+    text-decoration: none !important;
+}
+
+a.no-decoration:hover {
+    color: var(--text-dark);
+    text-decoration: none !important;
+}
+
 .header,
 .footer {
     padding: 5px;
@@ -64,7 +74,7 @@ legend {
     background-color: var(--bg-warn);
 }
 
-.main-central-container {
+.central-container {
     height: auto;
     padding-top: 2rem;
     padding-bottom: 3rem;
@@ -76,32 +86,6 @@ legend {
 
 .text-color-light {
     color: var(--text-light);
-}
-
-.select-symptoms {
-    height: 4rem;
-    /* margin-bottom: 1rem; */
-    /* margin-top: 1rem; */
-    padding: 0.5rem;
-    font-size: 20px;
-    background-color: var(--primary-light);
-    color: var(--text-light);
-    border: none;
-}
-
-.select-symptoms:focus {
-    background-color: var(--text-dark);
-    color: var(--text-light);
-}   
-
-.select-symptoms:disabled {
-    background-color: var(--primary-light);
-    color: var(--text-disabled-light);
-}
-
-.select-option {
-    background-color: var(--select-option);
-    color: var(--text-dark);
 }
 
 .forms {
@@ -116,35 +100,21 @@ legend {
     width: 100vw;
 }
 
-.del-symptom-btn{
-    margin-bottom: 2rem;
+.side-panel-box {
+    width: 40%;
+    margin: 3rem 4rem 3rem 4rem;
+    padding: 0 2rem 0;
 }
 
-#addNewSymptomBtn {
-    position: absolute;
-    width: 3rem;
-    height: 3rem;
-    right: -1.5rem;
-    bottom: 5rem;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-style: none;
+.primary-light-box{
+    background-color: var(--primary-light);
+    border-radius: 25px;
 }
 
-#addNewSymptomBtnContent{
-    font-size: 30px;
+.width-100 {
+    width: 100%;
 }
 
-
-#searchCancers {
-    margin: 1rem 0.25rem 1rem 0rem;
-    width: 75%;
-    color: var(--text-dark);
-}
-
-#clearAllSymptoms {
-    margin: 1rem 0rem 1rem 0.25rem;
-    width: 25%;
+.hieght-100 {
+    height: 100%;
 }

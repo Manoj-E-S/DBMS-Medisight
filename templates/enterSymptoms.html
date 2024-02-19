@@ -12,157 +12,170 @@
 
 
 {% block body %}
-    <div class="box background-warning" id="topNotification">
-        <h5 class="p-2 m-2">Are you a doctor? Share your profile with Medisight.</h5>
-        <input class="btn btn-info p-2 m-2" type="button" value="Submit Profile" id="registerDoctor">
-        <input class="btn btn-outline-dark p-2 m-2" type="button" value="Dismiss" id="dismissTopNotification">
-    </div>
-    <div class="box-column main-central-container">
-        <h3 class="text-color-light pb-2">Enlist your symptoms</h3>
-        <form class="forms" id="symptomSelector" action="/showCancers" method="post">
-            {% for i in range(select_elements) %}
-                {% if i != select_elements - 1: %}
-                    <select class="form-control select-symptoms" name="{{'selectSymptoms' ~ i}}" id="{{'selectSymptoms' ~ i}}" disabled>
-                        <!-- Breast Cancer -->
-                        <option selected class="select-option" value="1">Lump in the breast or underarm</option>
-                        <option class="select-option" value="2">Changes in the size, shape, or appearance of the breast</option>
-                        <option class="select-option" value="3">Unexplained pain in the breast or nipple</option>
-                        <option class="select-option" value="4">Nipple discharge (other than breast milk)</option>
-
-                        <!-- Lung Cancer -->
-                        <option class="select-option" value="5">Persistent cough or changes in a chronic cough</option>
-                        <option class="select-option" value="6">Chest pain or discomfort</option>
-                        <option class="select-option" value="7">Shortness of breath</option>
-                        <option class="select-option" value="8">Unexplained weight loss</option>
-                        <option class="select-option" value="9">Coughing up blood</option>
-
-                        <!-- Colorectal Cancer -->
-                        <option class="select-option" value="10">Changes in bowel habits (diarrhea, constipation, or narrowing of the stool)</option>
-                        <option class="select-option" value="11">Blood in the stool</option>
-                        <option class="select-option" value="12">Abdominal pain or discomfort</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-
-                        <!-- Prostate Cancer -->
-                        <option class="select-option" value="13">Difficulty urinating or changes in urinary habits</option>
-                        <option class="select-option" value="14">Blood in the urine or semen</option>
-                        <option class="select-option" value="15">Erectile dysfunction</option>
-                        <option class="select-option" value="16">Pelvic pain or discomfort</option>
-
-                        <!-- Ovarian Cancer -->
-                        <option class="select-option" value="17">Abdominal bloating or swelling</option>
-                        <!-- <option class="select-option" value="16">Pelvic pain or discomfort</option> -->
-                        <!-- <option class="select-option" value="10">Changes in bowel habits</option> -->
-                        <option class="select-option" value="18">Feeling full quickly while eating</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-
-                        <!-- Pancreatic Cancer -->
-                        <option class="select-option" value="19">Abdominal pain that may radiate to the back</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-                        <option class="select-option" value="20">Jaundice (yellowing of the skin and eyes)</option>
-                        <option class="select-option" value="21">Loss of appetite</option>
-
-                        <!-- Skin Cancer (Melanoma) -->
-                        <option class="select-option" value="22">Changes in the size, color, or shape of moles</option>
-                        <option class="select-option" value="23">Itching or tenderness in a mole</option>
-                        <option class="select-option" value="24">Bleeding or oozing from a mole</option>
-
-                        <!-- Leukemia -->
-                        <option class="select-option" value="25">Fatigue and weakness</option>
-                        <option class="select-option" value="26">Frequent infections</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-                        <option class="select-option" value="27">Easy bruising or bleeding</option>
-                        <option class="select-option" value="28">Enlarged lymph nodes or spleen</option>
-
-                        <!-- Cervical Cancer -->
-                        <option class="select-option" value="29">Abnormal vaginal bleeding (between periods, after sex, or after menopause)</option>
-                        <!-- <option class="select-option" value="16">Pelvic pain</option> -->
-                        <option class="select-option" value="30">Pain during sex</option>
-                        <option class="select-option" value="31">Vaginal discharge with an unpleasant odor</option>
-
-                        <!-- Thyroid Cancer -->
-                        <option class="select-option" value="32">Lump or swelling in the neck (thyroid nodule)</option>
-                        <option class="select-option" value="33">Hoarseness or voice changes</option>
-                        <option class="select-option" value="34">Difficulty swallowing</option>
-                        <option class="select-option" value="35">Pain in the neck or throat</option>
-                    </select>
-                    <button class="btn btn-outline-danger del-symptom-btn" type="button" id="{{'delSymptomBtn' ~ i}}">
-                        <i class="fa-solid fa-trash-can"></i> Delete
-                    </button>
-                {% else %}
-                    <select class="form-control select-symptoms" name="{{'selectSymptoms' ~ i}}" id="{{'selectSymptoms' ~ i}}">
-                        <!-- Breast Cancer -->
-                        <option selected class="select-option" value="1">Lump in the breast or underarm</option>
-                        <option class="select-option" value="2">Changes in the size, shape, or appearance of the breast</option>
-                        <option class="select-option" value="3">Unexplained pain in the breast or nipple</option>
-                        <option class="select-option" value="4">Nipple discharge (other than breast milk)</option>
-
-                        <!-- Lung Cancer -->
-                        <option class="select-option" value="5">Persistent cough or changes in a chronic cough</option>
-                        <option class="select-option" value="6">Chest pain or discomfort</option>
-                        <option class="select-option" value="7">Shortness of breath</option>
-                        <option class="select-option" value="8">Unexplained weight loss</option>
-                        <option class="select-option" value="9">Coughing up blood</option>
-
-                        <!-- Colorectal Cancer -->
-                        <option class="select-option" value="10">Changes in bowel habits (diarrhea, constipation, or narrowing of the stool)</option>
-                        <option class="select-option" value="11">Blood in the stool</option>
-                        <option class="select-option" value="12">Abdominal pain or discomfort</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-
-                        <!-- Prostate Cancer -->
-                        <option class="select-option" value="13">Difficulty urinating or changes in urinary habits</option>
-                        <option class="select-option" value="14">Blood in the urine or semen</option>
-                        <option class="select-option" value="15">Erectile dysfunction</option>
-                        <option class="select-option" value="16">Pelvic pain or discomfort</option>
-
-                        <!-- Ovarian Cancer -->
-                        <option class="select-option" value="17">Abdominal bloating or swelling</option>
-                        <!-- <option class="select-option" value="16">Pelvic pain or discomfort</option> -->
-                        <!-- <option class="select-option" value="10">Changes in bowel habits</option> -->
-                        <option class="select-option" value="18">Feeling full quickly while eating</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-
-                        <!-- Pancreatic Cancer -->
-                        <option class="select-option" value="19">Abdominal pain that may radiate to the back</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-                        <option class="select-option" value="20">Jaundice (yellowing of the skin and eyes)</option>
-                        <option class="select-option" value="21">Loss of appetite</option>
-
-                        <!-- Skin Cancer (Melanoma) -->
-                        <option class="select-option" value="22">Changes in the size, color, or shape of moles</option>
-                        <option class="select-option" value="23">Itching or tenderness in a mole</option>
-                        <option class="select-option" value="24">Bleeding or oozing from a mole</option>
-
-                        <!-- Leukemia -->
-                        <option class="select-option" value="25">Fatigue and weakness</option>
-                        <option class="select-option" value="26">Frequent infections</option>
-                        <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
-                        <option class="select-option" value="27">Easy bruising or bleeding</option>
-                        <option class="select-option" value="28">Enlarged lymph nodes or spleen</option>
-
-                        <!-- Cervical Cancer -->
-                        <option class="select-option" value="29">Abnormal vaginal bleeding (between periods, after sex, or after menopause)</option>
-                        <!-- <option class="select-option" value="16">Pelvic pain</option> -->
-                        <option class="select-option" value="30">Pain during sex</option>
-                        <option class="select-option" value="31">Vaginal discharge with an unpleasant odor</option>
-                        
-                        <!-- Thyroid Cancer -->
-                        <option class="select-option" value="32">Lump or swelling in the neck (thyroid nodule)</option>
-                        <option class="select-option" value="33">Hoarseness or voice changes</option>
-                        <option class="select-option" value="34">Difficulty swallowing</option>
-                        <option class="select-option" value="35">Pain in the neck or throat</option>
-                    </select>
-                {% endif %}
-            {% endfor %}
-            <button class="btn-primary" type="button" id="addNewSymptomBtn">
-                <span id="addNewSymptomBtnContent">+</span>
-            </button>
-            <div class="box">
-                <input class="btn btn-success" type="submit" value="Search Possible Cancers" id="searchCancers">
-                <input class="btn btn-danger" type="button" value="Clear All Symptoms" id="clearAllSymptoms">
+    <div class="box box-space-evenly">
+        <div class="box-column pt-5 pb-5 pl-5" id="symptomSelectorContainer">
+            <h3 class="text-color-light pb-2">Enlist your symptoms</h3>
+            <form class="forms" id="symptomSelector" action="/showCancers" method="post">
+                {% for i in range(select_elements) %}
+                    {% if i != select_elements - 1: %}
+                        <select class="form-control select-symptoms" name="{{'selectSymptoms' ~ i}}" id="{{'selectSymptoms' ~ i}}" disabled>
+                            <!-- Breast Cancer -->
+                            <option selected class="select-option" value="1">Lump in the breast or underarm</option>
+                            <option class="select-option" value="2">Changes in the size, shape, or appearance of the breast</option>
+                            <option class="select-option" value="3">Unexplained pain in the breast or nipple</option>
+                            <option class="select-option" value="4">Nipple discharge (other than breast milk)</option>
+    
+                            <!-- Lung Cancer -->
+                            <option class="select-option" value="5">Persistent cough or changes in a chronic cough</option>
+                            <option class="select-option" value="6">Chest pain or discomfort</option>
+                            <option class="select-option" value="7">Shortness of breath</option>
+                            <option class="select-option" value="8">Unexplained weight loss</option>
+                            <option class="select-option" value="9">Coughing up blood</option>
+    
+                            <!-- Colorectal Cancer -->
+                            <option class="select-option" value="10">Changes in bowel habits (diarrhea, constipation, or narrowing of the stool)</option>
+                            <option class="select-option" value="11">Blood in the stool</option>
+                            <option class="select-option" value="12">Abdominal pain or discomfort</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+    
+                            <!-- Prostate Cancer -->
+                            <option class="select-option" value="13">Difficulty urinating or changes in urinary habits</option>
+                            <option class="select-option" value="14">Blood in the urine or semen</option>
+                            <option class="select-option" value="15">Erectile dysfunction</option>
+                            <option class="select-option" value="16">Pelvic pain or discomfort</option>
+    
+                            <!-- Ovarian Cancer -->
+                            <option class="select-option" value="17">Abdominal bloating or swelling</option>
+                            <!-- <option class="select-option" value="16">Pelvic pain or discomfort</option> -->
+                            <!-- <option class="select-option" value="10">Changes in bowel habits</option> -->
+                            <option class="select-option" value="18">Feeling full quickly while eating</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+    
+                            <!-- Pancreatic Cancer -->
+                            <option class="select-option" value="19">Abdominal pain that may radiate to the back</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+                            <option class="select-option" value="20">Jaundice (yellowing of the skin and eyes)</option>
+                            <option class="select-option" value="21">Loss of appetite</option>
+    
+                            <!-- Skin Cancer (Melanoma) -->
+                            <option class="select-option" value="22">Changes in the size, color, or shape of moles</option>
+                            <option class="select-option" value="23">Itching or tenderness in a mole</option>
+                            <option class="select-option" value="24">Bleeding or oozing from a mole</option>
+    
+                            <!-- Leukemia -->
+                            <option class="select-option" value="25">Fatigue and weakness</option>
+                            <option class="select-option" value="26">Frequent infections</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+                            <option class="select-option" value="27">Easy bruising or bleeding</option>
+                            <option class="select-option" value="28">Enlarged lymph nodes or spleen</option>
+    
+                            <!-- Cervical Cancer -->
+                            <option class="select-option" value="29">Abnormal vaginal bleeding (between periods, after sex, or after menopause)</option>
+                            <!-- <option class="select-option" value="16">Pelvic pain</option> -->
+                            <option class="select-option" value="30">Pain during sex</option>
+                            <option class="select-option" value="31">Vaginal discharge with an unpleasant odor</option>
+    
+                            <!-- Thyroid Cancer -->
+                            <option class="select-option" value="32">Lump or swelling in the neck (thyroid nodule)</option>
+                            <option class="select-option" value="33">Hoarseness or voice changes</option>
+                            <option class="select-option" value="34">Difficulty swallowing</option>
+                            <option class="select-option" value="35">Pain in the neck or throat</option>
+                        </select>
+                        <button class="btn btn-outline-danger del-symptom-btn" type="button" id="{{'delSymptomBtn' ~ i}}">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </button>
+                    {% else %}
+                        <select class="form-control select-symptoms" name="{{'selectSymptoms' ~ i}}" id="{{'selectSymptoms' ~ i}}">
+                            <!-- Breast Cancer -->
+                            <option selected class="select-option" value="1">Lump in the breast or underarm</option>
+                            <option class="select-option" value="2">Changes in the size, shape, or appearance of the breast</option>
+                            <option class="select-option" value="3">Unexplained pain in the breast or nipple</option>
+                            <option class="select-option" value="4">Nipple discharge (other than breast milk)</option>
+    
+                            <!-- Lung Cancer -->
+                            <option class="select-option" value="5">Persistent cough or changes in a chronic cough</option>
+                            <option class="select-option" value="6">Chest pain or discomfort</option>
+                            <option class="select-option" value="7">Shortness of breath</option>
+                            <option class="select-option" value="8">Unexplained weight loss</option>
+                            <option class="select-option" value="9">Coughing up blood</option>
+    
+                            <!-- Colorectal Cancer -->
+                            <option class="select-option" value="10">Changes in bowel habits (diarrhea, constipation, or narrowing of the stool)</option>
+                            <option class="select-option" value="11">Blood in the stool</option>
+                            <option class="select-option" value="12">Abdominal pain or discomfort</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+    
+                            <!-- Prostate Cancer -->
+                            <option class="select-option" value="13">Difficulty urinating or changes in urinary habits</option>
+                            <option class="select-option" value="14">Blood in the urine or semen</option>
+                            <option class="select-option" value="15">Erectile dysfunction</option>
+                            <option class="select-option" value="16">Pelvic pain or discomfort</option>
+    
+                            <!-- Ovarian Cancer -->
+                            <option class="select-option" value="17">Abdominal bloating or swelling</option>
+                            <!-- <option class="select-option" value="16">Pelvic pain or discomfort</option> -->
+                            <!-- <option class="select-option" value="10">Changes in bowel habits</option> -->
+                            <option class="select-option" value="18">Feeling full quickly while eating</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+    
+                            <!-- Pancreatic Cancer -->
+                            <option class="select-option" value="19">Abdominal pain that may radiate to the back</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+                            <option class="select-option" value="20">Jaundice (yellowing of the skin and eyes)</option>
+                            <option class="select-option" value="21">Loss of appetite</option>
+    
+                            <!-- Skin Cancer (Melanoma) -->
+                            <option class="select-option" value="22">Changes in the size, color, or shape of moles</option>
+                            <option class="select-option" value="23">Itching or tenderness in a mole</option>
+                            <option class="select-option" value="24">Bleeding or oozing from a mole</option>
+    
+                            <!-- Leukemia -->
+                            <option class="select-option" value="25">Fatigue and weakness</option>
+                            <option class="select-option" value="26">Frequent infections</option>
+                            <!-- <option class="select-option" value="8">Unexplained weight loss</option> -->
+                            <option class="select-option" value="27">Easy bruising or bleeding</option>
+                            <option class="select-option" value="28">Enlarged lymph nodes or spleen</option>
+    
+                            <!-- Cervical Cancer -->
+                            <option class="select-option" value="29">Abnormal vaginal bleeding (between periods, after sex, or after menopause)</option>
+                            <!-- <option class="select-option" value="16">Pelvic pain</option> -->
+                            <option class="select-option" value="30">Pain during sex</option>
+                            <option class="select-option" value="31">Vaginal discharge with an unpleasant odor</option>
+                            
+                            <!-- Thyroid Cancer -->
+                            <option class="select-option" value="32">Lump or swelling in the neck (thyroid nodule)</option>
+                            <option class="select-option" value="33">Hoarseness or voice changes</option>
+                            <option class="select-option" value="34">Difficulty swallowing</option>
+                            <option class="select-option" value="35">Pain in the neck or throat</option>
+                        </select>
+                    {% endif %}
+                {% endfor %}
+                <button class="btn-primary" type="button" id="addNewSymptomBtn">
+                    <span id="addNewSymptomBtnContent">+</span>
+                </button>
+                <div class="box">
+                    <input class="btn btn-success" type="submit" value="Search Possible Cancers" id="searchCancers">
+                    <input class="btn btn-danger" type="button" value="Clear All Symptoms" id="clearAllSymptoms">
+                </div>
+            </form>
+        </div>
+        <div class="box-column side-panel-box text-light" id="ctaPanelContainer">
+            <div class="primary-light-box ctaPanel width-100 mb-3">
+                <em><h4 class="p-2 mt-2">Looking for a seemless experience in online healtcare?</h4></em>
+                <button type="button" id="signUpPageLink" class="btn btn-warning ml-2 mb-3 mr-1">Make a FREE account</button>
+                <button type="button" id="loginPageLink" class="btn btn-success mb-3 ml-1 text-dark">Login Here</button>
             </div>
-        </form>
+            <div class="primary-light-box ctaPanel width-100 mt-3">
+                <em><h4 class="p-2 mt-2">Are you a doctor? Share your profile with Medisight.</h4></em>
+                <input class="btn btn-info m-2 mb-4 text-dark" type="button" value="Submit Profile" id="registerDoctor">
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+
+{% block custom_css %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/enterSymptoms.css') }}">
 {% endblock %}
 
 

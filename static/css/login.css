@@ -1,9 +1,6 @@
-.login-to-account {
-    background-color: var(--primary-light);
-    border-radius: 25px;
+#loginToAccount {
     width: 55%;
     margin: 2rem 0 4rem;
-    padding: 0 2rem 0;
 }
 
 #loginBtn {
